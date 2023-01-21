@@ -2,8 +2,8 @@ import { gql } from '@apollo/client'
 import { Box } from 'native-base'
 import React from 'react'
 
-import { AchievementCardAchievementFragment } from '../../../generated/graphql'
 import AchievementBox, { AchievementBoxFragments } from './AchievementBox'
+import { AchievementCardAchievementFragment } from '../../../generated/graphql'
 
 const AchievementCardFragments = {
   achievement: gql`

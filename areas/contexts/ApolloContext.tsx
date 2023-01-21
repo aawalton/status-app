@@ -7,8 +7,8 @@ import {
 import { setContext } from '@apollo/client/link/context'
 import React, { ReactNode, useMemo } from 'react'
 
-import { supabaseAnonKey, supabaseUrl } from '../../lib/supabase'
 import { useSession } from './SupabaseContext'
+import { supabaseAnonKey, supabaseUrl } from '../../lib/supabase'
 
 function ApolloContext({ children }: { children: ReactNode }): JSX.Element {
   const session = useSession()

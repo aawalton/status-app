@@ -2,11 +2,11 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
+import { useSession } from './SupabaseContext'
+import { RootStackParamList } from './types'
 import AccountScreen from '../account/AccountScreen'
 import Auth from '../account/Auth'
 import AchievementScreen from '../achievements/AchievementScreen'
-import { useSession } from './SupabaseContext'
-import { RootStackParamList } from './types'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 

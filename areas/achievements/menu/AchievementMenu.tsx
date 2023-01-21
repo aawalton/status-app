@@ -2,11 +2,11 @@ import { gql } from '@apollo/client'
 import { IconButton, Menu, ThreeDotsIcon } from 'native-base'
 import React, { useState } from 'react'
 
+import DoneMenuItem, { DoneMenuItemFragments } from './DoneMenuItem'
 import { AchievementMenuAchievementFragment } from '../../../generated/graphql'
 import EditAchievementModal, {
   EditAchievementModalFragments,
 } from '../modals/EditAchievementModal'
-import DoneMenuItem, { DoneMenuItemFragments } from './DoneMenuItem'
 
 export const AchievementMenuFragments = {
   achievement: gql`

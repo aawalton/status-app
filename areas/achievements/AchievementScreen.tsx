@@ -4,13 +4,13 @@ import { ScrollView, Button, Column, Row } from 'native-base'
 import React, { useEffect, useState } from 'react'
 import { useWindowDimensions } from 'react-native'
 
-import { RootStackParamList } from '../contexts/types'
 import AchievementFilters from './buttons/AchievementFilters'
 import AddAchievementButton from './buttons/AddAchievementButton'
 import ResetProgressButton from './buttons/ResetProgressButton'
 import AchievementCard from './cards/AchievementCard'
 import useAchievements from './hooks/useAchievements'
 import { AchievementFilter } from './types'
+import { RootStackParamList } from '../contexts/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Achievements'>
 
