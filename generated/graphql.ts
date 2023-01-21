@@ -95,6 +95,8 @@ export type Mutation = {
   __typename: 'Mutation';
   /** Deletes zero or more records from the `achievement_categories` collection */
   deleteFromachievement_categoriesCollection: Achievement_CategoriesDeleteResponse;
+  /** Deletes zero or more records from the `achievement_circles` collection */
+  deleteFromachievement_circlesCollection: Achievement_CirclesDeleteResponse;
   /** Deletes zero or more records from the `achievement_colors` collection */
   deleteFromachievement_colorsCollection: Achievement_ColorsDeleteResponse;
   /** Deletes zero or more records from the `achievement_formats` collection */
@@ -121,6 +123,8 @@ export type Mutation = {
   deleteFromwondrium_coursesCollection: Wondrium_CoursesDeleteResponse;
   /** Adds one or more `achievement_categories` records to the collection */
   insertIntoachievement_categoriesCollection?: Maybe<Achievement_CategoriesInsertResponse>;
+  /** Adds one or more `achievement_circles` records to the collection */
+  insertIntoachievement_circlesCollection?: Maybe<Achievement_CirclesInsertResponse>;
   /** Adds one or more `achievement_colors` records to the collection */
   insertIntoachievement_colorsCollection?: Maybe<Achievement_ColorsInsertResponse>;
   /** Adds one or more `achievement_formats` records to the collection */
@@ -147,6 +151,8 @@ export type Mutation = {
   insertIntowondrium_coursesCollection?: Maybe<Wondrium_CoursesInsertResponse>;
   /** Updates zero or more records in the `achievement_categories` collection */
   updateachievement_categoriesCollection: Achievement_CategoriesUpdateResponse;
+  /** Updates zero or more records in the `achievement_circles` collection */
+  updateachievement_circlesCollection: Achievement_CirclesUpdateResponse;
   /** Updates zero or more records in the `achievement_colors` collection */
   updateachievement_colorsCollection: Achievement_ColorsUpdateResponse;
   /** Updates zero or more records in the `achievement_formats` collection */
@@ -178,6 +184,13 @@ export type Mutation = {
 export type MutationDeleteFromachievement_CategoriesCollectionArgs = {
   atMost?: Scalars['Int'];
   filter?: InputMaybe<Achievement_CategoriesFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromachievement_CirclesCollectionArgs = {
+  atMost?: Scalars['Int'];
+  filter?: InputMaybe<Achievement_CirclesFilter>;
 };
 
 
@@ -272,6 +285,12 @@ export type MutationInsertIntoachievement_CategoriesCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntoachievement_CirclesCollectionArgs = {
+  objects: Array<Achievement_CirclesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntoachievement_ColorsCollectionArgs = {
   objects: Array<Achievement_ColorsInsertInput>;
 };
@@ -348,6 +367,14 @@ export type MutationUpdateachievement_CategoriesCollectionArgs = {
   atMost?: Scalars['Int'];
   filter?: InputMaybe<Achievement_CategoriesFilter>;
   set: Achievement_CategoriesUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdateachievement_CirclesCollectionArgs = {
+  atMost?: Scalars['Int'];
+  filter?: InputMaybe<Achievement_CirclesFilter>;
+  set: Achievement_CirclesUpdateInput;
 };
 
 
@@ -476,6 +503,8 @@ export type Query = {
   __typename: 'Query';
   /** A pagable collection of type `achievement_categories` */
   achievement_categoriesCollection?: Maybe<Achievement_CategoriesConnection>;
+  /** A pagable collection of type `achievement_circles` */
+  achievement_circlesCollection?: Maybe<Achievement_CirclesConnection>;
   /** A pagable collection of type `achievement_colors` */
   achievement_colorsCollection?: Maybe<Achievement_ColorsConnection>;
   /** A pagable collection of type `achievement_formats` */
@@ -513,6 +542,17 @@ export type QueryAchievement_CategoriesCollectionArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<Achievement_CategoriesOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryAchievement_CirclesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<Achievement_CirclesFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<Achievement_CirclesOrderBy>>;
 };
 
 
@@ -777,6 +817,97 @@ export type Achievement_CategoriesUpdateResponse = {
   affectedCount: Scalars['Int'];
   /** Array of records impacted by the mutation */
   records: Array<Achievement_Categories>;
+};
+
+export type Achievement_Circles = Node & {
+  __typename: 'achievement_circles';
+  achievementsCollection?: Maybe<AchievementsConnection>;
+  circle_name: Scalars['String'];
+  created_at?: Maybe<Scalars['Datetime']>;
+  deleted_at?: Maybe<Scalars['Datetime']>;
+  id: Scalars['UUID'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID'];
+  updated_at?: Maybe<Scalars['Datetime']>;
+};
+
+
+export type Achievement_CirclesAchievementsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']>;
+  before?: InputMaybe<Scalars['Cursor']>;
+  filter?: InputMaybe<AchievementsFilter>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<AchievementsOrderBy>>;
+};
+
+export type Achievement_CirclesConnection = {
+  __typename: 'achievement_circlesConnection';
+  edges: Array<Achievement_CirclesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Achievement_CirclesDeleteResponse = {
+  __typename: 'achievement_circlesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Achievement_Circles>;
+};
+
+export type Achievement_CirclesEdge = {
+  __typename: 'achievement_circlesEdge';
+  cursor: Scalars['String'];
+  node: Achievement_Circles;
+};
+
+export type Achievement_CirclesFilter = {
+  circle_name?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  deleted_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type Achievement_CirclesInsertInput = {
+  circle_name?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['Datetime']>;
+  deleted_at?: InputMaybe<Scalars['Datetime']>;
+  id?: InputMaybe<Scalars['UUID']>;
+  updated_at?: InputMaybe<Scalars['Datetime']>;
+};
+
+export type Achievement_CirclesInsertResponse = {
+  __typename: 'achievement_circlesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Achievement_Circles>;
+};
+
+export type Achievement_CirclesOrderBy = {
+  circle_name?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  deleted_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type Achievement_CirclesUpdateInput = {
+  circle_name?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['Datetime']>;
+  deleted_at?: InputMaybe<Scalars['Datetime']>;
+  id?: InputMaybe<Scalars['UUID']>;
+  updated_at?: InputMaybe<Scalars['Datetime']>;
+};
+
+export type Achievement_CirclesUpdateResponse = {
+  __typename: 'achievement_circlesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int'];
+  /** Array of records impacted by the mutation */
+  records: Array<Achievement_Circles>;
 };
 
 export type Achievement_Colors = Node & {
@@ -1151,12 +1282,14 @@ export type Achievement_TypesUpdateResponse = {
 export type Achievements = Node & {
   __typename: 'achievements';
   achievement_categories?: Maybe<Achievement_Categories>;
+  achievement_circles?: Maybe<Achievement_Circles>;
   achievement_formats?: Maybe<Achievement_Formats>;
   achievement_points?: Maybe<Achievement_Points>;
   achievement_types?: Maybe<Achievement_Types>;
   achievements?: Maybe<Achievements>;
   achievementsCollection?: Maybe<AchievementsConnection>;
   category_name: Scalars['String'];
+  circle_name: Scalars['String'];
   completed?: Maybe<Scalars['Boolean']>;
   completed_at?: Maybe<Scalars['Datetime']>;
   context?: Maybe<Scalars['String']>;
@@ -1172,7 +1305,6 @@ export type Achievements = Node & {
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID'];
   parent_achievement_id?: Maybe<Scalars['UUID']>;
-  people: Array<Maybe<Scalars['String']>>;
   percent_complete?: Maybe<Scalars['String']>;
   points: Scalars['Int'];
   progress: Scalars['String'];
@@ -1216,6 +1348,7 @@ export type AchievementsEdge = {
 
 export type AchievementsFilter = {
   category_name?: InputMaybe<StringFilter>;
+  circle_name?: InputMaybe<StringFilter>;
   completed?: InputMaybe<BooleanFilter>;
   completed_at?: InputMaybe<DatetimeFilter>;
   context?: InputMaybe<StringFilter>;
@@ -1243,6 +1376,7 @@ export type AchievementsFilter = {
 
 export type AchievementsInsertInput = {
   category_name?: InputMaybe<Scalars['String']>;
+  circle_name?: InputMaybe<Scalars['String']>;
   completed_at?: InputMaybe<Scalars['Datetime']>;
   context?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['Datetime']>;
@@ -1254,7 +1388,6 @@ export type AchievementsInsertInput = {
   level?: InputMaybe<Scalars['Int']>;
   link?: InputMaybe<Scalars['String']>;
   parent_achievement_id?: InputMaybe<Scalars['UUID']>;
-  people?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   points?: InputMaybe<Scalars['Int']>;
   progress?: InputMaybe<Scalars['String']>;
   progress_at?: InputMaybe<Scalars['Datetime']>;
@@ -1275,6 +1408,7 @@ export type AchievementsInsertResponse = {
 
 export type AchievementsOrderBy = {
   category_name?: InputMaybe<OrderByDirection>;
+  circle_name?: InputMaybe<OrderByDirection>;
   completed?: InputMaybe<OrderByDirection>;
   completed_at?: InputMaybe<OrderByDirection>;
   context?: InputMaybe<OrderByDirection>;
@@ -1301,6 +1435,7 @@ export type AchievementsOrderBy = {
 
 export type AchievementsUpdateInput = {
   category_name?: InputMaybe<Scalars['String']>;
+  circle_name?: InputMaybe<Scalars['String']>;
   completed_at?: InputMaybe<Scalars['Datetime']>;
   context?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['Datetime']>;
@@ -1312,7 +1447,6 @@ export type AchievementsUpdateInput = {
   level?: InputMaybe<Scalars['Int']>;
   link?: InputMaybe<Scalars['String']>;
   parent_achievement_id?: InputMaybe<Scalars['UUID']>;
-  people?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   points?: InputMaybe<Scalars['Int']>;
   progress?: InputMaybe<Scalars['String']>;
   progress_at?: InputMaybe<Scalars['Datetime']>;
