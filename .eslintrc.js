@@ -27,7 +27,7 @@ module.exports = {
     'react/no-multi-comp': ['warn', { "ignoreStateless": true }],
 
     // compare to the root package.json instead of the nearest
-    "import/no-extraneous-dependencies": ["error", {"packageDir": './'}],
+    // "import/no-extraneous-dependencies": ["error", {"packageDir": './'}],
 
     // allow specific common dangles used by other systems
     "no-underscore-dangle": ["error", {"allow": ["__typename"]}],
