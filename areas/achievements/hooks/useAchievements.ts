@@ -83,8 +83,18 @@ const useAchievements = ({
     variables: {
       filter: {
         completed: { eq: false },
-        ...(filter === 'active' ? { category_name: { eq: 'fun' } } : {}),
-        ...(filter === 'passive' ? { category_name: { neq: 'fun' } } : {}),
+        ...(filter === 'active'
+          ? {
+              format_name: { eq: 'automatic' },
+              circle_name: { eq: 'solo' },
+            }
+          : {}),
+        ...(filter === 'passive'
+          ? {
+              format_name: { in: ['audio', 'video'] },
+              circle_name: { eq: 'solo' },
+            }
+          : {}),
       },
       orderBy: [
         { percent_complete: OrderByDirection.DescNullsLast },
