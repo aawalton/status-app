@@ -1,0 +1,7 @@
+ignores: [
+  "lint-staged",
+  "react-native-web",
+  "react-native-url-polyfill",
+  "@graphql-codegen/typescript",
+  "@graphql-codegen/typescript-operations"
+]

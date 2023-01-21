@@ -1,0 +1,13 @@
+# Config files
+.eslintrc.js
+babel.config.js
+
+# Build folders
+.expo
+.expo-shared
+assets
+node_modules
+web-build
+
+# Generated files
+generated
