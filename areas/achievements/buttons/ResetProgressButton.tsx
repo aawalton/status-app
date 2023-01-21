@@ -50,6 +50,7 @@ export default function ResetProgressButton(): JSX.Element {
       onPress={() => {
         void resetProgressMutation()
       }}
+      alignSelf="flex-start"
     >
       Reset
     </Button>

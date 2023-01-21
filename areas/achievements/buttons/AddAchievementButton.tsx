@@ -11,7 +11,7 @@ function AddAchievementButton(): JSX.Element {
       <AddAchievementModal key="modal" isOpen={isOpen} setIsOpen={setIsOpen} />
       <Fab
         key="fab"
-        placement="top-right"
+        placement="bottom-right"
         icon={<AddIcon />}
         onPress={() => setIsOpen(true)}
       />

@@ -29,7 +29,7 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
     navigation.setParams({ format: formatFilter, circle: circleFilter })
   }, [formatFilter, circleFilter, navigation])
 
-  const { achievements, refetch } = useAchievements({
+  const { achievements } = useAchievements({
     formatFilter,
     circleFilter,
   })
@@ -65,17 +65,7 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
             formatState={[formatFilter, setFormatFilter]}
             circleState={[circleFilter, setCircleFilter]}
           />
-          <Row>
-            <ResetProgressButton />
-            <Button
-              variant="ghost"
-              onPress={() => {
-                void refetch()
-              }}
-            >
-              Refresh
-            </Button>
-          </Row>
+          <ResetProgressButton />
         </Row>
         {active.map((achievement) => (
           <AchievementCard key={achievement.id} achievement={achievement} />
