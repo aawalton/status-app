@@ -9,7 +9,7 @@ import AddAchievementButton from './buttons/AddAchievementButton'
 import ResetProgressButton from './buttons/ResetProgressButton'
 import AchievementCard from './cards/AchievementCard'
 import useAchievements from './hooks/useAchievements'
-import { AchievementFilter } from './types'
+import { AchievementCircleFilter, AchievementFormatFilter } from './types'
 import { RootStackParamList } from '../contexts/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Achievements'>
@@ -18,16 +18,21 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
   const { height } = useWindowDimensions()
   const [showNotStarted, setShowNotStarted] = useState(false)
 
-  const [filter, setFilter] = useState<AchievementFilter>(
-    route.params?.filter ?? 'passive'
+  const [formatFilter, setFormatFilter] = useState<AchievementFormatFilter>(
+    route.params?.format ?? 'passive'
   )
-  const showAll = filter === 'all'
+  const [circleFilter, setCircleFilter] = useState<AchievementCircleFilter>(
+    route.params?.circle ?? 'solo'
+  )
 
   useEffect(() => {
-    navigation.setParams({ filter })
-  }, [filter, navigation])
+    navigation.setParams({ format: formatFilter, circle: circleFilter })
+  }, [formatFilter, circleFilter, navigation])
 
-  const { achievements, refetch } = useAchievements({ filter })
+  const { achievements, refetch } = useAchievements({
+    formatFilter,
+    circleFilter,
+  })
 
   const oneDayAgo = new Date()
   oneDayAgo.setDate(oneDayAgo.getDate() - 1)
@@ -38,13 +43,11 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
   const active = achievements
     .filter(
       (achievement) =>
-        showAll ||
         !achievement.completed_at ||
         achievement.completed_at > oneDayAgo.toISOString()
     )
     .filter(
       (achievement) =>
-        showAll ||
         !achievement.progress_at ||
         achievement.progress_at < oneDayAgo.toISOString() ||
         achievement.progress_at > oneMinuteAgo.toISOString()
@@ -52,23 +55,16 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
     .filter(
       (achievement) => showNotStarted || _.toNumber(achievement.progress) > 0
     )
-    .filter(
-      (achievement) =>
-        filter !== 'active' ||
-        achievement.achievement_categories?.name === 'fun'
-    )
-    .filter(
-      (achievement) =>
-        filter !== 'passive' ||
-        achievement.achievement_categories?.name !== 'fun'
-    )
 
   return (
     <ScrollView height={height}>
       <AddAchievementButton />
       <Column alignItems="center">
         <Row width="80%" mt="8" mb="4" justifyContent="space-between">
-          <AchievementFilters filter={filter} setFilter={setFilter} />
+          <AchievementFilters
+            formatState={[formatFilter, setFormatFilter]}
+            circleState={[circleFilter, setCircleFilter]}
+          />
           <Row>
             <ResetProgressButton />
             <Button

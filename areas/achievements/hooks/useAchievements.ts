@@ -6,7 +6,7 @@ import {
   OrderByDirection,
   UseAchievementsAchievementFragment,
 } from '../../../generated/graphql'
-import { AchievementFilter } from '../types'
+import { AchievementCircleFilter, AchievementFormatFilter } from '../types'
 
 const useAchievementsFragments = {
   achievement: gql`
@@ -69,33 +69,47 @@ type Refetch = (
 ) => Promise<ApolloQueryResult<AchievementsCollectionQuery>>
 
 const useAchievements = ({
-  filter,
+  formatFilter,
+  circleFilter,
 }: {
-  filter: AchievementFilter
+  formatFilter: AchievementFormatFilter
+  circleFilter: AchievementCircleFilter
 }): {
   achievements: UseAchievementsAchievementFragment[]
   refetch: Refetch
 } => {
+  const getFormatFilter = () => {
+    if (formatFilter === 'passive')
+      return { format_name: { in: ['audio', 'video'] } }
+    if (formatFilter === 'automatic')
+      return { format_name: { eq: 'automatic' } }
+    if (formatFilter === 'focused') return { format_name: { eq: 'focused' } }
+    return {}
+  }
+
+  const getCircleFilter = () => {
+    if (circleFilter === 'solo') return { circle_name: { eq: 'solo' } }
+    if (circleFilter === 'jenny') return { circle_name: { eq: 'with_jenny' } }
+    if (circleFilter === 'group') return { circle_name: { eq: 'with_group' } }
+    return {}
+  }
+
+  const getFilter = () => {
+    return {
+      completed: { eq: false },
+      ...getFormatFilter(),
+      ...getCircleFilter(),
+    }
+  }
+
+  const filter = getFilter()
+
   const { data, refetch } = useQuery<
     AchievementsCollectionQuery,
     AchievementsCollectionQueryVariables
   >(GET_ACHIEVEMENTS, {
     variables: {
-      filter: {
-        completed: { eq: false },
-        ...(filter === 'active'
-          ? {
-              format_name: { eq: 'automatic' },
-              circle_name: { eq: 'solo' },
-            }
-          : {}),
-        ...(filter === 'passive'
-          ? {
-              format_name: { in: ['audio', 'video'] },
-              circle_name: { eq: 'solo' },
-            }
-          : {}),
-      },
+      filter,
       orderBy: [
         { percent_complete: OrderByDirection.DescNullsLast },
         { title: OrderByDirection.AscNullsLast },

@@ -1,6 +1,12 @@
-import { AchievementFilter } from '../achievements/types'
+import {
+  AchievementCircleFilter,
+  AchievementFormatFilter,
+} from '../achievements/types'
 
 export type RootStackParamList = {
-  Achievements: { filter: AchievementFilter }
+  Achievements: {
+    format?: AchievementFormatFilter
+    circle?: AchievementCircleFilter
+  }
   Account: undefined
 }
