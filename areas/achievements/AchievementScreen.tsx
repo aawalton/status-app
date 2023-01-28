@@ -8,7 +8,11 @@ import AddAchievementButton from './buttons/AddAchievementButton'
 import ResetProgressButton from './buttons/ResetProgressButton'
 import AchievementCard from './cards/AchievementCard'
 import useAchievements from './hooks/useAchievements'
-import { AchievementCircleFilter, AchievementFormatFilter } from './types'
+import {
+  AchievementCategoryFilter,
+  AchievementCircleFilter,
+  AchievementFormatFilter,
+} from './types'
 import { RootStackParamList } from '../contexts/types'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Achievements'>
@@ -17,15 +21,21 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
   const { height } = useWindowDimensions()
 
   const [formatFilter, setFormatFilter] = useState<AchievementFormatFilter>(
-    route.params?.format ?? 'passive'
+    route.params?.format
   )
   const [circleFilter, setCircleFilter] = useState<AchievementCircleFilter>(
-    route.params?.circle ?? 'solo'
+    route.params?.circle
   )
+  const [categoryFilter, setCategoryFilter] =
+    useState<AchievementCategoryFilter>(route.params?.category)
 
   useEffect(() => {
-    navigation.setParams({ format: formatFilter, circle: circleFilter })
-  }, [formatFilter, circleFilter, navigation])
+    navigation.setParams({
+      format: formatFilter,
+      circle: circleFilter,
+      category: categoryFilter,
+    })
+  }, [formatFilter, circleFilter, categoryFilter, navigation])
 
   const { achievements } = useAchievements({
     formatFilter,
@@ -59,6 +69,7 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
           <AchievementFilters
             formatState={[formatFilter, setFormatFilter]}
             circleState={[circleFilter, setCircleFilter]}
+            categoryState={[categoryFilter, setCategoryFilter]}
           />
           <ResetProgressButton />
         </Row>

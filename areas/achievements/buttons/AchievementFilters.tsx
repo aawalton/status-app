@@ -1,11 +1,16 @@
-import { Button, Row } from 'native-base'
+import { CheckIcon, Row, Select } from 'native-base'
 import React, { Dispatch, SetStateAction } from 'react'
 
-import { AchievementCircleFilter, AchievementFormatFilter } from '../types'
+import {
+  AchievementCategoryFilter,
+  AchievementCircleFilter,
+  AchievementFormatFilter,
+} from '../types'
 
 function AchievementFilters({
   formatState,
   circleState,
+  categoryState,
 }: {
   formatState: [
     AchievementFormatFilter,
@@ -15,73 +20,70 @@ function AchievementFilters({
     AchievementCircleFilter,
     Dispatch<SetStateAction<AchievementCircleFilter>>
   ]
+  categoryState: [
+    AchievementCategoryFilter,
+    Dispatch<SetStateAction<AchievementCategoryFilter>>
+  ]
 }): JSX.Element {
   const [formatFilter, setFormatFilter] = formatState
   const [circleFilter, setCircleFilter] = circleState
+  const [categoryFilter, setCategoryFilter] = categoryState
 
   return (
     <Row space={[0, 4]} flexDir={['column', 'row']}>
-      <Button.Group
-        isAttached
-        mx={{
-          base: 'auto',
-          md: 0,
+      {/* Select Format */}
+      <Select
+        selectedValue={formatFilter}
+        placeholder="Choose Format"
+        _selectedItem={{
+          bg: 'teal.600',
+          endIcon: <CheckIcon size="5" />,
         }}
-        size="md"
+        onValueChange={(format) =>
+          setFormatFilter(format as AchievementFormatFilter)
+        }
       >
-        <Button
-          w="16"
-          variant={formatFilter === 'passive' ? undefined : 'outline'}
-          onPress={() => setFormatFilter('passive')}
-        >
-          Passive
-        </Button>
-        <Button
-          w="16"
-          variant={formatFilter === 'automatic' ? undefined : 'outline'}
-          onPress={() => setFormatFilter('automatic')}
-        >
-          Auto
-        </Button>
-        <Button
-          w="16"
-          variant={formatFilter === 'focused' ? undefined : 'outline'}
-          onPress={() => setFormatFilter('focused')}
-        >
-          Focused
-        </Button>
-      </Button.Group>
-      <Button.Group
-        isAttached
-        mx={{
-          base: 'auto',
-          md: 0,
+        <Select.Item label="Passive" value="passive" />
+        <Select.Item label="Auto" value="automatic" />
+        <Select.Item label="Focused" value="focused" />
+      </Select>
+
+      {/* Select Circle */}
+      <Select
+        selectedValue={circleFilter}
+        placeholder="Choose Circle"
+        _selectedItem={{
+          bg: 'teal.600',
+          endIcon: <CheckIcon size="5" />,
         }}
-        size="md"
-        mt={[4, 0]}
+        onValueChange={(circle) =>
+          setCircleFilter(circle as AchievementCircleFilter)
+        }
       >
-        <Button
-          w="16"
-          variant={circleFilter === 'solo' ? undefined : 'outline'}
-          onPress={() => setCircleFilter('solo')}
-        >
-          Solo
-        </Button>
-        <Button
-          w="16"
-          variant={circleFilter === 'jenny' ? undefined : 'outline'}
-          onPress={() => setCircleFilter('jenny')}
-        >
-          Jenny
-        </Button>
-        <Button
-          w="16"
-          variant={circleFilter === 'group' ? undefined : 'outline'}
-          onPress={() => setCircleFilter('group')}
-        >
-          Group
-        </Button>
-      </Button.Group>
+        <Select.Item label="Solo" value="solo" />
+        <Select.Item label="Jenny" value="jenny" />
+        <Select.Item label="Group" value="group" />
+      </Select>
+
+      {/* Select Category */}
+      <Select
+        selectedValue={categoryFilter}
+        placeholder="Choose Category"
+        _selectedItem={{
+          bg: 'teal.600',
+          endIcon: <CheckIcon size="5" />,
+        }}
+        onValueChange={(category) =>
+          setCategoryFilter(category as AchievementCategoryFilter)
+        }
+      >
+        <Select.Item label="Faith" value="faith" />
+        <Select.Item label="Love" value="love" />
+        <Select.Item label="Health" value="health" />
+        <Select.Item label="Learn" value="learn" />
+        <Select.Item label="Fun" value="fun" />
+        <Select.Item label="Wealth" value="wealth" />
+      </Select>
     </Row>
   )
 }
