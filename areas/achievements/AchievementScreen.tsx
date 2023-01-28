@@ -1,6 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import _ from 'lodash'
-import { ScrollView, Button, Column, Row } from 'native-base'
+import { ScrollView, Column, Row } from 'native-base'
 import React, { useEffect, useState } from 'react'
 import { useWindowDimensions } from 'react-native'
 
@@ -16,7 +15,6 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Achievements'>
 
 function AchievementScreen({ route, navigation }: Props): JSX.Element {
   const { height } = useWindowDimensions()
-  const [showNotStarted, setShowNotStarted] = useState(false)
 
   const [formatFilter, setFormatFilter] = useState<AchievementFormatFilter>(
     route.params?.format ?? 'passive'
@@ -52,9 +50,6 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
         achievement.progress_at < oneDayAgo.toISOString() ||
         achievement.progress_at > oneMinuteAgo.toISOString()
     )
-    .filter(
-      (achievement) => showNotStarted || _.toNumber(achievement.progress) > 0
-    )
 
   return (
     <ScrollView height={height}>
@@ -70,16 +65,6 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
         {active.map((achievement) => (
           <AchievementCard key={achievement.id} achievement={achievement} />
         ))}
-        {achievements.length > 0 && !showNotStarted && (
-          <Button onPress={() => setShowNotStarted(true)} my="4">
-            Show Not Started
-          </Button>
-        )}
-        {achievements.length > 0 && showNotStarted && (
-          <Button onPress={() => setShowNotStarted(false)} my="4">
-            Hide Not Started
-          </Button>
-        )}
       </Column>
     </ScrollView>
   )
