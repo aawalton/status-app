@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { ScrollView, Column, Row } from 'native-base'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useWindowDimensions } from 'react-native'
 
 import AchievementFilters from './buttons/AchievementFilters'
@@ -29,13 +29,19 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
   const [categoryFilter, setCategoryFilter] =
     useState<AchievementCategoryFilter>(route.params?.category ?? '')
 
+  const getFilters = useCallback(() => {
+    return {
+      ...(formatFilter ? { format: formatFilter } : { format: undefined }),
+      ...(circleFilter ? { circle: circleFilter } : { circle: undefined }),
+      ...(categoryFilter
+        ? { category: categoryFilter }
+        : { category: undefined }),
+    }
+  }, [formatFilter, circleFilter, categoryFilter])
+
   useEffect(() => {
-    navigation.setParams({
-      format: formatFilter,
-      circle: circleFilter,
-      category: categoryFilter,
-    })
-  }, [formatFilter, circleFilter, categoryFilter, navigation])
+    navigation.setParams(getFilters())
+  }, [getFilters, navigation])
 
   const { achievements } = useAchievements({
     formatFilter,
