@@ -55,18 +55,12 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
   const oneMinuteAgo = new Date()
   oneMinuteAgo.setMinutes(oneMinuteAgo.getMinutes() - 1)
 
-  const active = achievements
-    .filter(
-      (achievement) =>
-        !achievement.completed_at ||
-        achievement.completed_at > oneDayAgo.toISOString()
-    )
-    .filter(
-      (achievement) =>
-        !achievement.progress_at ||
-        achievement.progress_at < oneDayAgo.toISOString() ||
-        achievement.progress_at > oneMinuteAgo.toISOString()
-    )
+  const active = achievements.filter(
+    (achievement) =>
+      !achievement.progress_at ||
+      achievement.progress_at < oneDayAgo.toISOString() ||
+      achievement.progress_at > oneMinuteAgo.toISOString()
+  )
 
   return (
     <ScrollView height={height}>
