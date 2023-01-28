@@ -43,6 +43,7 @@ function AchievementFilters({
           setFormatFilter(format as AchievementFormatFilter)
         }
       >
+        <Select.Item label="Any Format" value="" />
         <Select.Item label="Passive" value="passive" />
         <Select.Item label="Auto" value="automatic" />
         <Select.Item label="Focused" value="focused" />
@@ -60,6 +61,7 @@ function AchievementFilters({
           setCircleFilter(circle as AchievementCircleFilter)
         }
       >
+        <Select.Item label="Any Circle" value="" />
         <Select.Item label="Solo" value="solo" />
         <Select.Item label="Jenny" value="jenny" />
         <Select.Item label="Group" value="group" />
@@ -77,6 +79,7 @@ function AchievementFilters({
           setCategoryFilter(category as AchievementCategoryFilter)
         }
       >
+        <Select.Item label="Any Category" value="" />
         <Select.Item label="Faith" value="faith" />
         <Select.Item label="Love" value="love" />
         <Select.Item label="Health" value="health" />

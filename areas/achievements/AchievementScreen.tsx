@@ -21,13 +21,13 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
   const { height } = useWindowDimensions()
 
   const [formatFilter, setFormatFilter] = useState<AchievementFormatFilter>(
-    route.params?.format
+    route.params?.format ?? ''
   )
   const [circleFilter, setCircleFilter] = useState<AchievementCircleFilter>(
-    route.params?.circle
+    route.params?.circle ?? ''
   )
   const [categoryFilter, setCategoryFilter] =
-    useState<AchievementCategoryFilter>(route.params?.category)
+    useState<AchievementCategoryFilter>(route.params?.category ?? '')
 
   useEffect(() => {
     navigation.setParams({
@@ -40,6 +40,7 @@ function AchievementScreen({ route, navigation }: Props): JSX.Element {
   const { achievements } = useAchievements({
     formatFilter,
     circleFilter,
+    categoryFilter,
   })
 
   const oneDayAgo = new Date()

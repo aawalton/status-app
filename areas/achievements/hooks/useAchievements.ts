@@ -6,7 +6,11 @@ import {
   OrderByDirection,
   UseAchievementsAchievementFragment,
 } from '../../../generated/graphql'
-import { AchievementCircleFilter, AchievementFormatFilter } from '../types'
+import {
+  AchievementCategoryFilter,
+  AchievementCircleFilter,
+  AchievementFormatFilter,
+} from '../types'
 
 const useAchievementsFragments = {
   achievement: gql`
@@ -71,9 +75,11 @@ type Refetch = (
 const useAchievements = ({
   formatFilter,
   circleFilter,
+  categoryFilter,
 }: {
   formatFilter: AchievementFormatFilter
   circleFilter: AchievementCircleFilter
+  categoryFilter: AchievementCategoryFilter
 }): {
   achievements: UseAchievementsAchievementFragment[]
   refetch: Refetch
@@ -94,11 +100,17 @@ const useAchievements = ({
     return {}
   }
 
+  const getCategoryFilter = () => {
+    if (categoryFilter) return { category_name: { eq: categoryFilter } }
+    return {}
+  }
+
   const getFilter = () => {
     return {
       completed: { eq: false },
       ...getFormatFilter(),
       ...getCircleFilter(),
+      ...getCategoryFilter(),
     }
   }
 
