@@ -30,7 +30,7 @@ function AchievementFilters({
   const [categoryFilter, setCategoryFilter] = categoryState
 
   return (
-    <Row space={[0, 4]} flexDir={['column', 'row']} mt={[0, 2]}>
+    <Row flexDir={['column', 'row']}>
       {/* Select Format */}
       <Select
         selectedValue={formatFilter}
@@ -42,7 +42,6 @@ function AchievementFilters({
         onValueChange={(format) =>
           setFormatFilter(format as AchievementFormatFilter)
         }
-        p="1"
       >
         <Select.Item label="Any Format" value="" />
         <Select.Item label="Passive" value="passive" />
@@ -61,7 +60,7 @@ function AchievementFilters({
         onValueChange={(circle) =>
           setCircleFilter(circle as AchievementCircleFilter)
         }
-        p="1"
+        mt={[2, 0]}
       >
         <Select.Item label="Any Circle" value="" />
         <Select.Item label="Solo" value="solo" />
@@ -80,7 +79,7 @@ function AchievementFilters({
         onValueChange={(category) =>
           setCategoryFilter(category as AchievementCategoryFilter)
         }
-        p="1"
+        mt={[2, 0]}
       >
         <Select.Item label="Any Category" value="" />
         <Select.Item label="Faith" value="faith" />
