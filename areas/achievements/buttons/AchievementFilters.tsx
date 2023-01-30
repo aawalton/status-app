@@ -44,7 +44,8 @@ function AchievementFilters({
         }
       >
         <Select.Item label="Any Format" value="" />
-        <Select.Item label="Passive" value="passive" />
+        <Select.Item label="Audio" value="audio" />
+        <Select.Item label="Video" value="video" />
         <Select.Item label="Auto" value="automatic" />
         <Select.Item label="Focused" value="focused" />
       </Select>

@@ -2,7 +2,12 @@ export type AchievementType = 'boolean' | 'integer' | 'collection' | 'sequence'
 
 export type AchievementPoints = '5' | '10' | '15' | '50'
 
-export type AchievementFormatFilter = 'passive' | 'automatic' | 'focused' | ''
+export type AchievementFormatFilter =
+  | 'audio'
+  | 'video'
+  | 'automatic'
+  | 'focused'
+  | ''
 
 export type AchievementCircleFilter = 'solo' | 'jenny' | 'group' | ''
 

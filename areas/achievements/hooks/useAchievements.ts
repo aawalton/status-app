@@ -85,8 +85,8 @@ const useAchievements = ({
   refetch: Refetch
 } => {
   const getFormatFilter = () => {
-    if (formatFilter === 'passive')
-      return { format_name: { in: ['audio', 'video'] } }
+    if (formatFilter === 'audio') return { format_name: { eq: 'audio' } }
+    if (formatFilter === 'video') return { format_name: { eq: 'video' } }
     if (formatFilter === 'automatic')
       return { format_name: { eq: 'automatic' } }
     if (formatFilter === 'focused') return { format_name: { eq: 'focused' } }
