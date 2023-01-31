@@ -62,6 +62,7 @@ function AchievementFilters({
           setCircleFilter(circle as AchievementCircleFilter)
         }
         mt={[2, 0]}
+        ml={[0, 2]}
       >
         <Select.Item label="Any Circle" value="" />
         <Select.Item label="Solo" value="solo" />
@@ -81,6 +82,7 @@ function AchievementFilters({
           setCategoryFilter(category as AchievementCategoryFilter)
         }
         mt={[2, 0]}
+        ml={[0, 2]}
       >
         <Select.Item label="Any Category" value="" />
         <Select.Item label="Faith" value="faith" />
