@@ -106,7 +106,7 @@ function AchievementBox({
           first: 1,
           filter: {
             parent_achievement_id: { eq: achievement.id },
-            percent_complete: { lte: achievement.percent_complete },
+            completed: { eq: false },
           },
           orderBy: [{ level: OrderByDirection.AscNullsLast }],
         },
