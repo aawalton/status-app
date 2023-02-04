@@ -40,7 +40,7 @@ export default function ResetProgressButton(): JSX.Element {
         user_id: { eq: session?.user.id },
         progress_at: { gt: oneDayAgo.toISOString() },
       },
-      atMost: 100,
+      atMost: 10000,
     },
   })
 
